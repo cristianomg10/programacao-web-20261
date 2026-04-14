@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class MovimentacaoEstoque extends Models
+{
+    protected $table = 'movimentacao_estoque';
+
+    protected $primarykey = 'id';
+
+}
