@@ -17,6 +17,9 @@
         <tr>
             <td>{{ $cidade->nome }}</td>
             <td>{{ $cidade->estado }}</td>
+            <td>
+    <a href="{{ route('cidades.edit', $cidade->id) }}" class="btn btn-warning">Editar</a>
+</td>
         </tr>
         @endforeach
     </tbody>

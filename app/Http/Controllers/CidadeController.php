@@ -60,7 +60,8 @@ class CidadeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cidade = Cidade::findOrFail($id);
+    return view('cidades.edit', compact('cidade'));
     }
 
     /**
@@ -72,7 +73,10 @@ class CidadeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cidade = Cidade::findOrFail($id);
+    $cidade->update($request->all());
+
+    return redirect()->route('cidades.index');
     }
 
     /**
