@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cidade;
 
 class CidadeController extends Controller
 {
@@ -13,7 +14,8 @@ class CidadeController extends Controller
      */
     public function index()
     {
-        return view('cidades.index');
+       $cidades = Cidade::all();
+    return view('cidades.index', compact('cidades'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CidadeController extends Controller
      */
     public function create()
     {
-        //
+          return view('cidades.create');
     }
 
     /**
@@ -34,7 +36,9 @@ class CidadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       Cidade::create($request->all());
+
+    return redirect()->route('cidades.index');
     }
 
     /**

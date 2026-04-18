@@ -3,7 +3,7 @@
 @section('content')
 <h1>Lista de Cidades</h1>
 
-<a href="#" class="btn btn-primary mb-3">Nova Cidade</a>
+<a href="{{ route('cidades.create') }}" class="btn btn-primary mb-3">Nova Cidade</a>
 
 <table class="table">
     <thead>
@@ -13,10 +13,12 @@
         </tr>
     </thead>
     <tbody>
+        @foreach($cidades as $cidade)
         <tr>
-            <td>Exemplo</td>
-            <td>SC</td>
+            <td>{{ $cidade->nome }}</td>
+            <td>{{ $cidade->estado }}</td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection
