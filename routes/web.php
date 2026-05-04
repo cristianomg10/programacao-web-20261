@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/produtos', [ProdutosController::class, 'listar']);
+Route::get('/produtos/novo', 
+    [ProdutosController::class, 'novo'])
+    ->name('prod.novo');
+Route::post('/produtos/novo/{id?}',
+    [ProdutosController::class, 'salvar'])
+    ->name('prod.salvar');
+Route::get('/produtos/edit/{id}', 
+    [ProdutosController::class, 'edit'])
+    ->name('prod.edit');
+Route::get('/produtos/delete/{id}', [ProdutosController::class, 'delete'])->name('prod.delete');
 
 require __DIR__.'/auth.php';
