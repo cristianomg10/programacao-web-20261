@@ -8,11 +8,33 @@ use App\Models\Categoria;
 
 class ProdutosController extends Controller
 {
-    function listar(){
-        $produtos = Produto::all();
+    function listar(Request $req){
+        $produtos = Produto::query();
+        $pesquisa = "";
+        $ordem = "";
+
+        if ($req->filled('pesquisa')){
+            $pesquisa = $req->input("pesquisa");
+            $produtos = $produtos->where('nome', 'LIKE', "%$pesquisa%");
+        }
+
+        if ($req->filled('ordem')){
+            $ordem = $req->input('ordem');
+            if ($ordem == 'crescente') {
+                $produtos = $produtos->orderBy('nome', 'ASC');
+            } else {
+                $produtos = $produtos->orderBy('nome', 'DESC');
+            }
+        }
+        
+        $produtos = $produtos->paginate(2);
+        $produtos->appends([
+            'pesquisa' => $pesquisa,
+            'ordem' => $ordem
+        ]);
 
         return view('produtos_listar', 
-            ['produtos' => $produtos]);
+            ['produtos' => $produtos, 'pesquisa' => $pesquisa, 'ordem' => $ordem]);
     }
 
     function novo(){

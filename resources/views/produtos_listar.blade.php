@@ -7,6 +7,21 @@
 @if(session()->has('mensagem'))
 <div class="alert alert-info">{{ session('mensagem') }}</div>
 @endif
+
+<div>
+    <form method="GET" action="#" class="d-flex">
+        <input type="text" name="pesquisa" class="form-control" placeholder="Termo de pesquisa" style="width: 300px;" value="{{ $pesquisa }}">
+
+        <input type="radio" class="btn-check" name="ordem" id="asc" autocomplete="off" {{ ( $ordem == "crescente" ? "checked" : "") }} value="crescente">
+        <label class="btn btn-secondary" for="asc"><i class="bi bi-sort-alpha-down"></i></label>
+    
+        <input type="radio" class="btn-check" name="ordem" id="desc" autocomplete="off" {{ ( $ordem == "decrescente" ? "checked" : "") }} value="decrescente">
+        <label class="btn btn-secondary" for="desc"><i class="bi bi-sort-alpha-down-alt"></i></label>
+
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -57,6 +72,8 @@
         @endforeach
     </tbody>
 </table>
+
+{{ $produtos->links('pagination::bootstrap-4') }}
 
 <div>
     <a class="btn btn-success" 
